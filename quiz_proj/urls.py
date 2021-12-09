@@ -22,11 +22,26 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('quizez.urls', namespace="quizez")),
+    path('', views.home, name='home'),
+
+    # leaderboard and result
+    path('leaderboard/', views.leaderboards, name='leaderboards'),
+    path('results/', views.results, name='results'),
+
+
 
     # Auth
-    path('', views.signupuser, name='signupuser'),
-    # path('login/', views.loginuser, name='loginuser'),
-    # path('logout/', views.logoutuser, name='logoutuser'),
+    path('signup/', views.signupuser, name='signupuser'),
+    path('login/', views.loginuser, name='loginuser'),
+    path('logout/', views.logoutuser, name='logoutuser'),
+
+    # addquiz
+
+    path('add_quiz/', views.add_quiz, name='add_quiz'),
+    path('add_question/', views.add_question, name='add_question'),
+    path('add_options/<int:myid>/', views.add_options, name='add_options'),
+    path('delete_question/<int:myid>/',
+         views.delete_question, name='delete_question'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

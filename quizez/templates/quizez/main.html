@@ -10,7 +10,7 @@
 
 {% block title %}
 
-Here is the quizez for you.
+ChizZ Quiz.
 
 {% endblock title %}
 
@@ -29,6 +29,7 @@ Here is the quizez for you.
         </button>
       </div>
       <div class="modal-body" id="modal-body-confirm">
+        <p>Read the question carefully</p>
 
       </div>
       <div class="modal-footer">
@@ -38,6 +39,7 @@ Here is the quizez for you.
     </div>
   </div>
 </div>
+<h1 class="text-center">Dashboard </h1>
 <div class="h1">
   Quiz List
 </div>
@@ -48,8 +50,15 @@ Here is the quizez for you.
   data-questions="{{obj.number_of_questions}}" data-difficulty="{{obj.difficulty}}" data-time="{{obj.time}}"
   data-pass="{{obj.required_score_to_pass}}" data-toggle="modal" data-target="#exampleModal">
 
-  {{obj.name}}
-
+  <div class="card" style="width: 21rem;">
+    <img class="card-img-top" src="https://images.hdqwalls.com/download/python-logo-4k-i6-1280x1024.jpg"
+      alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title"> {{obj.name}}</h5>
+      <p class="card-text">Python {{obj.topic}}.</p>
+      <a href="#" class="btn btn-primary">Start</a>
+    </div>
+  </div>
 
 
 </button>

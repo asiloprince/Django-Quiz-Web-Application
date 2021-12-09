@@ -1,4 +1,4 @@
-console.log("Hey working")
+'use strict'
 
 const url = window.location.href
 let data

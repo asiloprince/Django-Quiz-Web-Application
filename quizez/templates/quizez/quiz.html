@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block scripts %}
-
+<script>alert('Read the question carefully, Goodluck!')</script>
 <script src="{% static 'quizez/quiz.js' %}" defer></script>
 
 {% endblock scripts %}
@@ -30,7 +30,7 @@ Quiz Of {{obj.name}}
 	</div>
 </div>
 
-<a class="btn btn-warning" href="{% url 'quizez:main-view' %}">Go Back</a>
+
 <hr>
 <form id="form-quiz" class="mt-3 mb-3">
 
@@ -48,7 +48,9 @@ Quiz Of {{obj.name}}
 
 <div id="score-box"></div>
 <div id="result-box"></div>
-
+<footer>
+	<a class="btn btn-warning" href="{% url 'quizez:main-view' %}">Close</a>
+</footer>
 
 
 {% endblock content %}

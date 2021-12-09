@@ -1,0 +1,25 @@
+{% block title %} Results {% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+  <br>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Quiz</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    {% for result in results %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{result.user}}</td>
+      <td>{{result.score}}</td>
+      <td>{{result.quiz}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <button style="background-color: #ffcc00; border-color: #ffcc00;"><a href="/main">close</a></button>
+</div>
+{% endblock %}

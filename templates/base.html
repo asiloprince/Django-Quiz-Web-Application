@@ -6,6 +6,18 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- favicon -->
   <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
@@ -20,30 +32,131 @@
   <!-- jquery -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-
-
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <!-- custom css & js-->
   <link rel="stylesheet" href="{% static 'style.css' %}">
-
+  <link rel="icon" type="image/png" href="{% static 'quizez/logo.png' %}">
   {% block scripts %}
   {% endblock scripts %}
+  <title>Take a Quiz | {% block title %}{% endblock title %}</title>
 
-  <title>Quiz Test | {% block title %}{% endblock title %}</title>
 </head>
+<style>
+  .logo {
+    position: relative;
+    bottom: 1rem;
+  }
+
+  .container-fluid {
+    height: 60px;
+  }
+
+  .head1 {
+    color: #14E3EB;
+    font-size: 2rem;
+    font-weight: bold;
+    height: 50px;
+  }
+
+  .nav-link {
+    color: white;
+    font-size: 18px;
+    font-family: sans-serif;
+  }
+
+  .navbar-customclass {
+    background-color: #302568;
+  }
+
+  .head2 {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+</style>
 
 <body>
-  <div class="container mt-3">
-    {% block content %}
-    {% endblock content %}
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
+  <nav class="navbar navbar-customclass navbar-expand-sm">
+    <div class="container">
+      <a class="navbar-brand" href="/main">
+        <img src="{% static 'quizez/logo.png' %}" width="60" height="60" class="logo d-inline-block align-text-top">
+        <span class="head1">Chizz</span> <span class="head2">Quiz</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        {% if user.is_authenticated %}
+        <ul class="navbar-nav mr-auto">
+          <a class="nav-link" href="">Welcome {{request.user}}</a>
+          <li class="nav-item {{ create }}">
+            <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+          </li>
+          {% if user.is_superuser %}
+          <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  Admin
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                  <li><a class="dropdown-item" href="/add_quiz/">Add Quiz</a></li>
+                  <li><a class="dropdown-item" href="/add_question/">Add Questions</a></li>
+                  <li><a class="dropdown-item" href="/results/">Results of the Users</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          {% endif %}
+
+        </ul>
+        {% endif %}
+        <ul class="navbar-nav ml-auto">
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a href="#" onclick="$('#signOutBtn').click()" class="nav-link">Logout</a>
+            <form style='display: none;' method="POST" action="{% url 'logoutuser' %}">
+              {% csrf_token %}
+              <button id="signOutBtn" type="submit">Logout</button>
+            </form>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'signupuser' %}">Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'loginuser' %}">Login</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
 </body>
+
 </body>
+
+<div class="container mt-3">
+  {% block content %}
+  {% endblock content %}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 </html>

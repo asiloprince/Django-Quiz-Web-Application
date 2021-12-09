@@ -1,4 +1,4 @@
-console.log("Working..")
+'use strict'
 
 
 const modalBtns = [...document.getElementsByClassName('modal-button')]
@@ -9,7 +9,7 @@ console.log(startBtn)
 
 const url = window.location.href
 
-modalBtns.forEach(modalBtn => modalBtn.addEventListener('click', ()=>{
+modalBtns.forEach(modalBtn => modalBtn.addEventListener('click', () => {
 
 
 
@@ -41,7 +41,7 @@ modalBtns.forEach(modalBtn => modalBtn.addEventListener('click', ()=>{
 
 	`
 
-	startBtn.addEventListener('click', ()=>{
+	startBtn.addEventListener('click', () => {
 
 		window.location.href = url + pk
 
