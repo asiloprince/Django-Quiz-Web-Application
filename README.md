@@ -6,3 +6,6 @@
 #run in the terminal py manage.py runserver
 
 
+#createsuper user
+#run py manage.py createsuperuser/ set up account
+
