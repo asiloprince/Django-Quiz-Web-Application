@@ -9,3 +9,8 @@
 #createsuper user
 #run py manage.py createsuperuser/ set up account
 
+#migrating database
+#py manage.py makemigrations
+#py manage.py migrate
+
+-p
